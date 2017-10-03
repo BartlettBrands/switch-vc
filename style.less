@@ -1,0 +1,1189 @@
+// VARIABLES
+// ----------------------------------------------
+
+@switch-orange: #f7c600;
+@switch-light-gray: #f2f4f1;
+
+@height1: 420px;
+@height2: 375px;
+@height3: 250px;
+@height4: 275px;
+@height5: 150px;
+
+@screen-lg-max: 1200px;
+@screen-md-max: 970px;
+@screen-sm-max: 768px;
+@screen-xs-max: 640px;
+@screen-xxs-max: 480px;
+
+@screen-xl-min: (@screen-lg-max + 1);
+@screen-lg-min: (@screen-md-max + 1);
+@screen-md-min: (@screen-sm-max + 1);
+@screen-sm-min: (@screen-xs-max + 1);
+@screen-xs-min: (@screen-xxs-max + 1);
+
+@query-xl-only: ~"screen and (min-width: @{screen-xl-min})";
+@query-lg-only: ~"screen and (min-width: @{screen-lg-min}) and (max-width: @{screen-lg-max})";
+@query-md-only: ~"screen and (min-width: @{screen-md-min}) and (max-width: @{screen-md-max})";
+@query-sm-only: ~"screen and (min-width: @{screen-sm-min}) and (max-width: @{screen-sm-max})";
+@query-xs-only: ~"screen and (min-width: @{screen-xs-min}) and (max-width: @{screen-xs-max})";
+@query-xxs-only: ~"screen and (max-width: @{screen-xxs-max})";
+
+@query-lg-and-up: ~"screen and (min-width: @{screen-lg-min})";
+@query-md-and-up: ~"screen and (min-width: @{screen-md-min})";
+@query-sm-and-up: ~"screen and (min-width: @{screen-sm-min})";
+@query-xs-and-up: ~"screen and (min-width: @{screen-xs-min})";
+
+@query-lg-and-down: ~"screen and (max-width: @{screen-lg-max})";
+@query-md-and-down: ~"screen and (max-width: @{screen-md-max})";
+@query-sm-and-down: ~"screen and (max-width: @{screen-sm-max})";
+@query-xs-and-down: ~"screen and (max-width: @{screen-xs-max})";
+
+@query-xs-thru-sm: ~"screen and (min-width: @{screen-xs-min}) and (max-width: @{screen-sm-max})";
+
+
+
+
+// REMOVE BASIC ELEMENTS
+// ----------------------------------------------
+// home button
+.main-nav ul li.index-collection:first-of-type,
+// footer image that we use for the header shield
+#block-yui_3_17_2_3_1449183927805_8692 {
+    display: none;
+}
+
+
+
+// MIXINS
+// ----------------------------------------------
+._squeeze-text-center {
+    max-width: 720px;
+    margin: 0 auto 0.8em;
+}
+._smaller-paragraph {
+    font-size: 17px;
+    line-height: 1.6em;
+}
+._blog-date-size {
+    font-size: 15px;
+    line-height: 3em;
+    white-space: nowrap;
+}
+._black-line {
+    background: black;
+    height: 6px;
+}
+._recenter-content {
+    max-width: 980px;
+    margin: 0 auto;
+    @media @query-md-and-up {
+        padding-left: 8%;
+        padding-right: 8%;
+    }
+}
+._parallax-main-hero-img {
+    img {
+        position: absolute !important;
+        height: auto !important;
+        width: 104% !important;
+        top: auto !important;
+        right: auto !important;
+        left: -2% !important;
+        bottom: -1% !important;
+    }
+}
+// adjusts the way the main hero looks on sub pages so that it's different from the home page
+._parallax-hero-alt {
+    > .title-desc-wrapper {
+        height: auto !important;
+        display: table;
+        width: 100%;
+        padding: 0;
+        > .title-desc-inner {
+            position: static;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            display: table-cell;
+            height: @height2;
+            vertical-align: middle;
+            width: 100%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+        h1.page-title {
+            color: white;
+            ._recenter-content();
+        }
+        .scroll-arrow {
+            display: none;
+        }
+    }
+}
+// full-screen boxes that highlight the vc images
+._parallax-faces-touchscreen {
+    .title-desc-image {
+        @media @query-sm-and-down {
+            padding-left: 40px;
+        }
+    }
+    .title-desc-inner {
+        padding: 80px 0 60px !important;
+    }
+}
+._parallax-faces-images {
+    background: @switch-orange;
+    @media @query-sm-and-down {
+        padding-left: 40px;
+    }
+
+}
+._parallax-faces {
+    .content {
+        background: black;
+    }
+    .title-desc-inner {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        box-sizing: border-box;
+        > br {
+            display: none;
+        }
+        > div {
+            margin-left: 50%;
+            margin-right: 0;
+            display: block;
+            width: 45%;
+            @media @query-sm-and-down {
+                width: 55%;
+                margin-left: 40%;
+            }
+        }
+    }
+    .page-title-wrapper {
+        display: block;
+    }
+    h1.page-title {
+        color: black;
+        font-size: 19px;
+        &:after {
+            display: none;
+        }
+    }
+    .page-desc {
+        color: white;
+        &:before, &:after {
+            content: '“';
+            display: block;
+            text-align: center;
+            font-size: 3em;
+            line-height: 0;
+            margin: 30px 0 20px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+        &:after {
+            content: '”';
+            margin-top: 60px;
+        }
+        > p {
+            @media @query-xxs-only {
+                font-size: 15px;
+            }
+        }
+    }
+}
+// light gray boxes that look like buttons but aren't
+._gray-box {
+    padding: 0;
+    margin: 0;
+    .sqs-block-content {
+        background: @switch-light-gray;
+        display: table;
+        width: 100%;
+        text-align: center;
+        > * {
+            color: black;
+            display: table-cell;
+            vertical-align: middle;
+            margin: 0;
+            height: 80px;
+            border: 17px solid white;
+            border-top-width: 0;
+        }
+    }
+    @media @query-sm-and-down {
+        float: none;
+        width: 100%;
+    }
+}
+
+
+
+// BODY
+// ----------------------------------------------
+body {
+    background: black;
+    @media @query-md-and-down {
+        font-size: 18px;
+        line-height: 29px;
+    }
+}
+* {
+    -moz-hyphens: none !important;
+    -ms-hyphens: none !important;
+    -webkit-hyphens: none !important;
+    hyphens: none !important;
+    word-break: none;
+}
+
+
+
+// HEADER
+// ----------------------------------------------
+.title-nav-wrapper {
+    background: white;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    @media @query-sm-and-down {
+        padding-top: 8px !important;
+        padding-bottom: 5px !important;
+    }
+}
+.title-desc-inner {
+    @media @query-lg-only {
+        width: 90%;
+    }
+    .page-desc p {
+        font-size: inherit;
+    }
+}
+.site-title {
+    display: block;
+    width: 100%;
+    height: 65px;
+    text-align: center;
+    background: transparent url('https://static1.squarespace.com/static/565e094fe4b0c5801323b627/t/5660cd45e4b0bcbe081854c2/1449184581618/?format=300w') no-repeat left top;
+    background-size: auto 65px;
+    position: relative;
+    z-index: 0; // stays below mobile nav icon
+    > a {
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+        img {
+            display: inline-block;
+            max-height: 30px;
+        }
+    }
+    @media @query-lg-and-down {
+        height: 60px;
+        background-size: auto 60px;
+        > a img {
+            max-height: 25px;
+        }
+    }
+    @media @query-sm-and-down {
+        height: 33px;
+        background-size: auto 33px;
+        padding-top: 3px;
+    }
+}
+#desktopNav {
+    display: block;
+    margin: -25px auto 0;
+    text-align: center;
+    width: 100%;
+    .main-nav ul {
+        text-align: center;
+        li {
+            margin: 0 15px;
+            &.active-link {
+                border-bottom: 3px solid black;
+            }
+            a span {
+                font-size: 14px;
+                @media @query-md-only {
+                    letter-spacing: 3px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    @media @query-sm-and-down {
+        display: none;
+    }
+}
+#header {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    .icon-menu {
+        display: block;
+        position: absolute;
+        z-index: 1;
+        top: 5px; // align to top of logotype, goes with 40px icon size
+        right: 11px; // icon has a 9px gap at 40px size
+        height: auto;
+        width: auto;
+        &:before {
+            font-size: 40px;
+            height: auto;
+            width: auto;
+            line-height: 1em;
+        }
+    }
+}
+// hero content for parallax pages
+#parallax-images {
+    + .parallax-item {
+        .title-desc-inner {
+            width: 90%;
+        }
+        .content-inner {
+            padding-top: 10%;
+            padding-bottom: 8%;
+        }
+    }
+}
+.parallax-item {
+    // redesigns the scroll arrow. only shown on the main page
+    .scroll-arrow {
+        margin-top: -10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+        margin: 0 auto;
+        transform: translateX(-50%) translateY(0) !important;
+        bottom: 35px;
+        &:after {
+            content: "";
+            display: block;
+            height: 26px;
+            width: 2px;
+            background: black;
+            position: absolute;
+            left: 23px;
+            bottom: 10px;
+        }
+        &:before {
+            display: inline-block;
+            border-radius: 50%;
+            width: 46px;
+            height: 46px;
+            line-height: 43px;
+            margin-top: 6px;
+        }
+        &:hover, &:focus {
+            color: gray;
+            border-color: gray;
+            &:before {
+                display: block;
+            }
+            &:after {
+                background: gray;
+            }
+            span {
+                display: none;
+            }
+        }
+        @media @query-xxs-only {
+            display: none !important;
+        }
+        // MAX-HEIGHT
+        @media screen and (max-height: @screen-xxs-max) {
+            display: none !important;
+        }
+    }
+}
+
+
+
+// FOOTER
+// ----------------------------------------------
+#footer {
+    // on iphone 6, a white edge was appearing around the base parallax images so this helped
+    margin-top: -1px;
+    .sqs-block-socialaccountlinks-v2 {
+        margin-top: -22px;
+    }
+}
+
+
+
+// CONTENT
+// ----------------------------------------------
+h1 {
+    @media @query-sm-and-down {
+        font-size: 32px;
+    }
+}
+h1.page-title {
+    @media @query-sm-and-down {
+        font-size: 36px;
+    }
+    @media @query-xxs-only {
+        font-size: 32px;
+    }
+}
+.content.has-main-image {
+    box-shadow: none;
+}
+.page-desc {
+    margin-top: 0;
+    > p {
+        ._squeeze-text-center();
+        max-width: 700px;
+        &.date {
+            ._blog-date-size();
+        }
+    }
+}
+.sqs-block-horizontalrule hr {
+    ._black-line();
+    margin: 40px 0;
+}
+.sqs-block-content {
+    > p.text-align-center {
+        ._squeeze-text-center();
+        @media @query-sm-and-down {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+    }
+}
+.form-wrapper .form-button-wrapper .button.sqs-editable-button,
+.large-button-style-outline .sqs-block-button .sqs-block-button-element {
+    border-width: 6px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: "futura-pt";
+    font-weight: bold;
+    font-size: 16px;
+    &.sqs-block-button-element {
+        font-size: 18px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    @media @query-xxs-only {
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+.form-wrapper .field-list .field .field-element {
+    border: 0;
+    background: @switch-light-gray;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 0;
+    font-family: "futura-pt";
+    font-size: 14px;
+    letter-spacing: 1px;
+    &:focus {
+        background-color: lighten(@switch-light-gray, 2%);
+    }
+}
+#content-wrapper {
+    h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+        &:after {
+            ._black-line();
+            content: "";
+            display: block;
+            text-align: center;
+            width: 100px;
+            margin: 35px auto;
+        }
+    }
+}
+// this is added to the parent element of _combo-box
+html.touch {
+    .js-combo-box-wrap {
+        > .sqs-col-3.span-3 {
+            > .sqs-block {
+                // flex: 0 0 auto;
+                &:first-child {
+                    padding-top: 8px !important;
+                    .image-block-wrapper {
+                        padding-bottom: 35% !important;
+                        img {
+                            width: 70% !important;
+                            left: 15% !important;
+                        }
+                    }
+                }
+                &.sqs-block-html {
+                    // flex: 1 1 auto;
+                    p {
+                        margin-bottom: 8px !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.js-combo-box-wrap {
+    padding: 0 17px;
+
+    + .sqs-block-spacer {
+        display: none;
+    }
+
+    > .sqs-col-3.span-3 {
+        @context-width: 23.5%;
+        margin: 0 0 40px;
+        padding: 0;
+        background: @switch-light-gray;
+        box-sizing: border-box;
+        width: @context-width;
+        max-width: @context-width;
+        min-width: @context-width;
+        overflow: hidden;
+
+        > .sqs-block {
+            margin: 0;
+            padding: 0;
+            background: @switch-light-gray;
+            border: 2px solid black;
+            border-width: 0 2px;
+
+            &:first-child {
+                padding: 0 !important;
+                background: white;
+                border-top-width: 2px;
+            }
+            &.sqs-block-html {
+                border-bottom-width: 2px;
+                padding: 20px 15px 0;
+                h3, p {
+                    color: black;
+                    font-size: 13px;
+                    line-height: 1.4em;
+                    margin: 0;
+                }
+                h3 {
+                    margin-bottom: 15px;
+                }
+                p {
+                    margin-top: 15px;
+                    margin-bottom: 30px;
+                }
+            }
+            &.sqs-block-spacer:first-child {
+                border-color: white;
+            }
+        }
+        @media @query-md-and-up {
+            margin-right: 2%;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        @media @query-xs-thru-sm {
+            @context-sm-width: 47%;
+            width: @context-sm-width !important;
+            max-width: @context-sm-width;
+            min-width: @context-sm-width;
+            margin-right: 6%;
+            float: left !important;
+            &:nth-of-type(2n) {
+                margin-right: 0;
+            }
+        }
+        @media @query-xxs-only {
+            width: 100% !important;
+            max-width: none;
+            min-width: auto;
+        }
+    }
+}
+
+
+
+// HOME PAGE
+// ----------------------------------------------
+html.touch {
+    body#collection-565e4950e4b0c49af4ad432f {
+        #content-wrapper {
+            > .parallax-item {
+                background: @switch-orange;
+                .title-desc-image {
+                    background: transparent;
+                }
+                &[data-url-id="switch-vc"] {
+                    background: @switch-light-gray;
+                    .title-desc-image {
+                        ._parallax-main-hero-img();
+                    }
+                }
+                &[data-url-id="follow-on-funding"] {
+                    background: black;
+                }
+                &[data-url-id^="founders-"] {
+                    ._parallax-faces-touchscreen();
+                }
+            }
+        }
+    }
+}
+body#collection-565e4950e4b0c49af4ad432f {
+    #content-wrapper {
+        #parallax-images {
+            .image-container {
+                background: black;
+                &[data-url-id="switch-vc"] {
+                    background: @switch-light-gray;
+                    ._parallax-main-hero-img();
+                }
+                &[data-url-id^="founders-"] {
+                    ._parallax-faces-images();
+                }
+            }
+        }
+        > .parallax-item[data-url-id="switch-vc"] {
+            padding: 0;
+            .title-desc-inner {
+                .page-desc {
+                    width: auto;
+                    max-width: 70% !important;
+                }
+                h1.page-title {
+                    // helps push a word to the second line
+                    max-width: 700px;
+                }
+            }
+            .content-inner {
+                padding-top: 10%;
+                @media @query-md-and-down {
+                    padding-bottom: 8%;
+                }
+            }
+        }
+        > .parallax-item[data-url-id="follow-on-funding"] {
+            .title-desc-wrapper {
+                display: none;
+            }
+            .content {
+                background: transparent;
+                .content-inner.has-content {
+                    background: black;
+                    max-width: none;
+                    .sqs-layout {
+                        .sqs-row > .col > .sqs-row {
+                            @media @query-sm-and-up {
+                                ._recenter-content();
+                                display: table;
+                                padding: 0;
+                            }
+                            > .sqs-col-6 {
+                                @media @query-sm-and-up {
+                                    float: none !important;
+                                    display: table-cell !important;
+                                    vertical-align: middle;
+                                    width: 50% !important;
+                                    > .sqs-block {
+                                        padding-left: 0;
+                                    }
+                                }
+                                &:first-child {
+                                    @media @query-md-and-up {
+                                        width: 55%;
+                                    }
+                                }
+                                &:last-child {
+                                    padding-bottom: 0;
+                                    > .sqs-block {
+                                        padding-top: 0 !important;
+                                        @media @query-xxs-only {
+                                            padding-right: (17px * 2) !important;
+                                            padding-left: (17px * 2) !important;
+                                            padding-bottom: (17px * 2) !important;
+                                        }
+                                    }
+                                    @media @query-md-and-up {
+                                        width: 45%;
+                                    }
+                                }
+                                h3 {
+                                    color: @switch-light-gray;
+                                }
+                                img {
+                                    max-width: 100%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        > .parallax-item[data-url-id^="founders-"] {
+            ._parallax-faces();
+        }
+    }
+}
+
+// OUR COMMUNITY PAGE
+// ----------------------------------------------
+body#collection-5660c74be4b0c3b0ea69e347 {
+    #content-wrapper {
+        > .parallax-item[data-url-id="flipping-work"] {
+            ._parallax-hero-alt();
+        }
+        > .parallax-item[data-url-id="prestige"] {
+            .title-desc-wrapper {
+                background: @switch-orange;
+                padding: 0 !important;
+                height: @height2;
+                @media @query-sm-and-down {
+                    height: 2 * @height4;
+                }
+            }
+            .title-desc-inner {
+                display: none;
+            }
+            .content {
+                background: transparent;
+                .content-inner.has-content {
+                    // pull static content into yellow area
+                    margin-top: -(@height2 - 60px);
+                    // blocks stack in a 2x2 grid, so we adjust for that.
+                    @media @query-sm-and-down {
+                        margin-top: -(2 * @height4 - 30px);
+                    }
+                    background: transparent;
+                    padding-top: 0;
+                    padding-left: 0;
+                    padding-right: 0;
+                    max-width: none;
+                    .sqs-layout {
+                        > .sqs-row {
+                            ._recenter-content();
+                            > .col {
+                                > .sqs-row:first-child {
+                                    > .col {
+                                        display: table-cell;
+                                        float: none;
+                                        vertical-align: middle;
+                                        @media @query-md-and-down {
+                                            > .sqs-block {
+                                                padding: 10px;
+                                            }
+                                        }
+                                        @media @query-sm-and-down {
+                                            display: block;
+                                            float: left !important;
+                                            width: 50% !important;
+                                            height: @height3;
+                                        }
+                                    }
+                                    h3 {
+                                        color: black;
+                                    }
+                                    p {
+                                        font-size: 15px;
+                                        line-height: 1.75em;
+                                        @media @query-md-and-down {
+                                            font-size: 13px;
+                                            line-height: 1.5em;
+                                        }
+                                    }
+                                    .image-block-outer-wrapper {
+                                        max-width: 160px;
+                                        margin: 0 auto;
+                                        @media @query-md-and-down {
+                                            max-width: 120px;
+                                        }
+                                    }
+                                    > .col:last-of-type {
+                                        vertical-align: top;
+                                        .sqs-block-content {
+                                            position: relative;
+                                            width: 100%;
+                                            p {
+                                                position: absolute;
+                                                top: 20px;
+                                                left: 0;
+                                                right: 0;
+                                                &:after {
+                                                    content: "";
+                                                    display: block;
+                                                    line-height: 0;
+                                                    border-top: 1px solid black;
+                                                    height: 0;
+                                                    width: 100px;
+                                                    position: absolute;
+                                                    top: 0.7em;
+                                                    left: -110px;
+                                                    @media @query-md-and-down {
+                                                        width: 80px;
+                                                        left: -90px;
+                                                    }
+                                                    @media @query-sm-and-down {
+                                                        width: 50%;
+                                                        left: -53%;
+                                                    }
+                                                }
+                                                &:nth-child(2) {
+                                                    top: 100px;
+                                                    &:after {
+                                                        width: 150px;
+                                                        left: -160px;
+                                                        @media @query-md-and-down {
+                                                            width: 110px;
+                                                            left: -120px;
+                                                        }
+                                                        @media @query-sm-and-down {
+                                                            width: 60%;
+                                                            left: -63%;
+                                                        }
+                                                        @media @query-xxs-only {
+                                                            width: 65%;
+                                                            left: -68%;
+                                                        }
+                                                    }
+                                                    @media @query-md-and-down {
+                                                        top: 80px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    + .sqs-block-spacer + .sqs-block-html {
+                                        padding-bottom: 40px;
+                                        @media @query-md-and-down {
+                                            padding-top: 60px;
+                                        }
+                                    }
+                                }
+                                > .sqs-block-html.sqs-col-6.float-right {
+                                    ._gray-box();
+                                    > .sqs-block-content > * {
+                                        @media @query-md-and-up {
+                                            border-left-width: 10px;
+                                        }
+                                    }
+                                    + .sqs-block-html:not(.float-right) {
+                                        ._gray-box();
+                                        > .sqs-block-content {
+                                            @media @query-md-and-up {
+                                                width: 50%;
+                                                > * {
+                                                    border-right-width: 10px;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                > .sqs-row:not(:first-child) > .sqs-col-3.span-3 {
+                                    // these are combo-boxes. the "js-combo-box-wrap" class is added to sqs-row (parent)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+// IS ABOUT PAGE
+// ----------------------------------------------
+html.touch {
+    body#collection-5660df08e4b0601b7496198e {
+        #content-wrapper {
+            > .parallax-item {
+                background: @switch-light-gray;
+                .title-desc-image {
+                    background: transparent;
+                }
+                &[data-url-id="breakers-makers"] {
+                    background: black;
+                }
+                &[data-url-id="paul"] {
+                    ._parallax-faces-touchscreen();
+                }
+            }
+        }
+    }
+}
+body#collection-5660df08e4b0601b7496198e {
+    #content-wrapper {
+        #parallax-images {
+            .image-container {
+                background: @switch-light-gray;
+                &[data-url-id="paul"] {
+                    ._parallax-faces-images();
+                    background: @switch-light-gray;
+                }
+            }
+        }
+        > .parallax-item[data-url-id="breakers-makers"] {
+            ._parallax-hero-alt();
+            > .title-desc-wrapper {
+                h1.page-title {
+                    color: @switch-orange;
+                    &:after {
+                        background: @switch-light-gray;
+                    }
+                }
+                .page-desc {
+                    color: @switch-light-gray;
+                }
+            }
+        }
+        > .parallax-item[data-url-id="paul"] {
+            ._parallax-faces();
+            h1.page-title {
+                color: @switch-orange;
+            }
+            .page-desc {
+                color: black;
+                &:before, &:after {
+                    display: none;
+                }
+                > p:first-child {
+                    font-size: 19px;
+                    line-height: 1.2em;
+                    letter-spacing: 0.2em;
+                    font-family: "proxima-nova";
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    margin-bottom: 30px;
+                    color: @switch-orange;
+                }
+            }
+        }
+    }
+}
+
+
+
+// TO REACH PAGE
+// ----------------------------------------------
+body#collection-565e306ae4b0a1cc6f58f2ea {
+    .title-desc-wrapper.no-main-image {
+        display: none;
+    }
+    .content-inner {
+        ._squeeze-text-center();
+        .sqs-col-11, .sqs-col-6 {
+            h3 {
+                color: black;
+            }
+        }
+        .sqs-col-1 {
+            float: left !important;
+            width: 8.3333% !important;
+        }
+        .sqs-col-11 {
+            float: left !important;
+            width: 91.6667% !important;
+        }
+        .sqs-col-6 {
+            float: left !important;
+            width: 50% !important;
+            > .sqs-block-html {
+                padding-top: 0;
+                padding-right: 2%;
+                padding-bottom: 0 !important;
+                padding-left: 5%;
+                box-sizing: border-box;
+                li {
+                    line-height: 0;
+                }
+            }
+            &:last-child {
+                > .sqs-block-html {
+                    padding-left: 2%;
+                    padding-right: 5%;
+                }
+            }
+        }
+        @media @query-sm-and-down {
+            padding-top: 80px;
+            .sqs-col-1 .sqs-block-image {
+                padding-right: 0;
+                padding-left: 17px * 2;
+                max-width: 24px;
+            }
+        }
+        @media @query-xxs-only {
+            padding-top: 40px;
+            h3 {
+                font-size: 13px;
+            }
+            .sqs-col-1 {
+                width: 16.6667% !important; // make two columns
+            }
+            .sqs-col-11 {
+                width: 83.3333% !important; // make 10 columns
+            }
+        }
+    }
+}
+
+
+
+// BIG IDEAS PAGE (BLOG)
+// ----------------------------------------------
+body#collection-566723536bb311fda414e41f {
+    .title-desc-inner {
+        h1.page-title {
+            color: black;
+        }
+        .page-desc {
+            display: none;
+        }
+        @media @query-lg-and-down {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateX(0) translateY(-50%) !important;
+            padding: 0 17px  !important;
+            width: 100%;
+            max-width: none;
+        }
+    }
+    .blog-list {
+        ._squeeze-text-center();
+        > article {
+            position: relative;
+            padding-bottom: 50px;
+            .entry-header {
+                border-top: 0;
+                margin: 0;
+                padding: 0;
+                height: 50px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                .entry-actions {
+                    display: none;
+                }
+                .entry-more-link {
+                    width: auto;
+                    float: right;
+                    font-size: 15px;
+                    line-height: 2em;
+                }
+            }
+            .entry-title-wrapper {
+                width: 30%;
+                margin-right: 0%;
+                @media @query-sm-only {
+                    width: 40%;
+                    float: left;
+                }
+                @media @query-xxs-only {
+                    width: 100%;
+                }
+            }
+            .entry-content {
+                width: 64%;
+                p {
+                    ._smaller-paragraph();
+                }
+                @media @query-sm-only {
+                    width: 54%;
+                    float: right;
+                }
+                @media @query-xxs-only {
+                    width: 100%;
+                }
+            }
+        }
+        .main-image-wrapper {
+            margin-bottom: 35px;
+            > a {
+                display: block;
+            }
+            .main-image {
+                height: @height3;
+                width: 100%;
+                img {
+                    width: 100% !important;
+                    height: auto !important;
+                }
+                @media @query-xxs-only {
+                    height: @height5;
+                }
+            }
+        }
+        h1.entry-title {
+            font-size: 26px !important;
+            line-height: 1.2em !important;
+            &:after {
+                margin-left: 0;
+            }
+        }
+        p.date {
+            ._blog-date-size();
+            @media @query-sm-and-down {
+                font-size: 13px;
+                line-height: 0;
+                margin: 0;
+            }
+            @media @query-xxs-only {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+
+
+// BLOG ENTRY PAGES
+// ----------------------------------------------
+.collection-type-blog.view-item {
+    .title-desc-wrapper {
+        .title-desc-inner {
+            padding-bottom: 0;
+            width: 90%;
+            box-sizing: border-box;
+        }
+        // with image in background, push title lower
+        &.has-main-image {
+            padding-top: 0;
+            padding-bottom: 0;
+            overflow: visible;
+            height: @height2;
+            .title-desc-inner {
+                padding: 25px 60px;
+                background: white;
+                position: relative;
+                max-height: @height2 - 50px; // subtract a 25px padding from top and bottom
+                top: @height3;
+                width: 90%;
+                @media @query-xxs-only {
+                    h1.page-title {
+                        font-size: 30px !important;
+                    }
+                }
+            }
+        }
+    }
+    #content-wrapper {
+        .content-inner {
+            margin-top: 80px; // overwritten by JS with exact .title-desc-inner height
+            padding-top: 0;
+        }
+        .entry-content {
+            ._squeeze-text-center();
+            .sqs-block-content {
+                ._smaller-paragraph();
+            }
+        }
+    }
+}

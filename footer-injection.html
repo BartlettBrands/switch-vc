@@ -1,0 +1,128 @@
+<script id="custom-js">
+    $.noConflict();
+    jQuery(document).ready(function($) {
+        $(window).load(function() {
+
+            // VARS
+            var isScreen = '';
+            if ($('body').hasClass('collection-565e4950e4b0c49af4ad432f')) {
+                isScreen = 'home';
+            }
+            else if ($('body').hasClass('collection-5660c74be4b0c3b0ea69e347')) {
+                isScreen = 'community';
+            }
+            else if ($('body').hasClass('collection-5660df08e4b0601b7496198e')) {
+                isScreen = 'about';
+            }
+            else if ($('body').hasClass('collection-565e306ae4b0a1cc6f58f2ea')) {
+                isScreen = 'reach';
+            }
+
+            function runEverythingOnWindowResize() {
+                // removes all previous styles with a different screen size
+                $('style[data-style^="js-"]').remove();
+
+                // VARS
+                var windowHeight    = $(window).height();
+                var headerHeight    = $('#header').outerHeight();
+                var isMobile        = $('html').hasClass('touch');
+
+                var homeHeroWrapMobileHeight;
+                if (isMobile && isScreen === 'home') {
+                    homeHeroWrapMobileHeight = $('html.touch .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper').height();
+                }
+                // VARS - elements
+                var comboxBox_ELEM = $(".js-combo-box-wrap > .sqs-col-3 > .sqs-block-html");
+
+                // VARS - selectors
+                var homeHeroWrap_SELECTORS          = '#parallax-images .image-container[data-url-id="switch-vc"]';
+                var blogEntryContent_SELECTORS      = '.collection-type-blog.view-item.has-banner-image #content-wrapper .content-inner';
+
+
+
+                // AFFIXED HEADER CONTENT MARGIN
+                // header is affixed in css. this makes it work on touch screens (it already works regularly)
+                if (isMobile) {
+                    var headerWrapMobile_SELECTORS = 'html.touch #header-wrapper';
+                    $('body').append('<style data-style="js-header-height">' + headerWrapMobile_SELECTORS + ' {padding-top:' + headerHeight + 'px !important;}</style>');
+                }
+
+                // SET HEIGHT FOR MAIN HEROS (TOUCH AND NON TOUCH SCREEN)
+                if (isScreen === 'home') {
+                    var homeHeroFalseTopImage_SELECTORS = 'html .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper .title-desc-image';
+
+                    if (!isMobile) {
+                        if ($(homeHeroFalseTopImage_SELECTORS).outerHeight() < windowHeight) {
+                            $('body').append('<style data-style="js-home-hero-height-non-mobile">' + homeHeroWrap_SELECTORS + ' {max-height:' + windowHeight + 'px !important;}</style>');
+                        }
+                    }
+                    // SET HEIGHT FOR MAIN HERO ON MOBILE
+                    // on mobile this was being all funky, which would effectively hide our main image
+                    else {
+                        // set height to window height if the hero content exceeds the window, otherwise use the window height
+                        $('body').append('<style data-style="js-home-hero-height-mobile">' + homeHeroFalseTopImage_SELECTORS + '{max-height:' +
+                            (homeHeroWrapMobileHeight && (windowHeight <= homeHeroWrapMobileHeight))? homeHeroWrapMobileHeight : windowHeight
+                            + 'px !important;}</style>');
+                    }
+                }
+
+                // COMBO BOX CSS
+                // add class only to 4 column-row boxes in "prestige" (not the first 4-col row one though). class is styled in CSS
+                $('.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3').parent().addClass("js-combo-box-wrap");
+                // find heights
+                // @from: http://stackoverflow.com/questions/6060992/element-with-the-max-height-from-a-set-of-elements
+                var comboBoxHeightsMap = comboxBox_ELEM.map(function() {
+                    return $(this).height();
+                }).get();
+                var comboBoxMaxHeight = Math.max.apply(null, comboBoxHeightsMap);
+                // set hieght
+                comboxBox_ELEM.css('height', comboBoxMaxHeight + 'px');
+
+
+                // BLOG ARTICLE CONTENT MARGIN
+                // adjust content margin for special blog article design
+                var blogEntryMargin = $('.collection-type-blog.view-item.has-banner-image .title-desc-wrapper .title-desc-inner').height() - 20;
+                $('body').append('<style data-style="js-blog-entry-margin">' + blogEntryContent_SELECTORS + '{margin-top:' + blogEntryMargin + 'px !important;}</style>');
+
+                // REMOVE HASH FROM URL
+                // @from: http://stackoverflow.com/questions/269044/remove-fragment-in-url-with-javascript-w-out-causing-page-reload
+                // @from: http://stackoverflow.com/questions/4597050/how-to-check-if-the-url-contains-a-given-string
+                // @from: https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onhashchange
+                // slice off the remaining '#' in HTML5:
+                if ((typeof window.history.replaceState == 'function') && ("onhashchange" in window)) {
+                    function repaceHashOnHashChange() {
+                        if ($(window).scrollTop() <= 0) {
+                            if (location.hash === "#switch-vc") {
+                                history.replaceState({}, '', window.location.href.slice(0, -10));
+                            }
+                            else if (location.hash === "#flipping-work") {
+                                history.replaceState({}, '', window.location.href.slice(0, -14));
+                            }
+                            else if (location.hash === "#breakers-makers") {
+                                history.replaceState({}, '', window.location.href.slice(0, -16));
+                            }
+                        }
+                    }
+                    window.onhashchange = repaceHashOnHashChange();
+                    setInterval(function() {
+                        repaceHashOnHashChange();
+                    }, 100);
+                }
+
+            }
+            runEverythingOnWindowResize();
+
+
+            // RERUN JS ON WINDOW RESIZE
+            // @from: http://stackoverflow.com/questions/22720595/re-run-js-script-on-window-resize-or-mobile-screen-change
+            // @from: http://stackoverflow.com/questions/7280307/resize-javascript-window
+            $(window).resize(function() {
+                // this tells the js to rerun everything even on window height adjustment
+                // $(window).height($(this).height());
+                runEverythingOnWindowResize();
+            }).resize();
+
+
+        });
+    });
+</script>
