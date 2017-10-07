@@ -168,13 +168,14 @@
     h1.page-title {
         color: black;
         font-size: 19px;
-        &:after {
+        &::after {
             display: none;
         }
     }
     .page-desc {
         color: white;
-        &:before, &:after {
+        &::before,
+        &::after {
             content: '“';
             display: block;
             text-align: center;
@@ -183,7 +184,7 @@
             margin: 30px 0 20px;
             font-family: 'Titillium Web', sans-serif;
         }
-        &:after {
+        &::after {
             content: '”';
             margin-top: 60px;
         }
@@ -328,7 +329,7 @@ body {
         right: 11px; // icon has a 9px gap at 40px size
         height: auto;
         width: auto;
-        &:before {
+        &::before {
             font-size: 40px;
             height: auto;
             width: auto;
@@ -359,7 +360,7 @@ body {
         margin: 0 auto;
         transform: translateX(-50%) translateY(0) !important;
         bottom: 35px;
-        &:after {
+        &::after {
             content: "";
             display: block;
             height: 26px;
@@ -369,7 +370,7 @@ body {
             left: 23px;
             bottom: 10px;
         }
-        &:before {
+        &::before {
             display: inline-block;
             border-radius: 50%;
             width: 46px;
@@ -377,13 +378,15 @@ body {
             line-height: 43px;
             margin-top: 6px;
         }
-        &:hover, &:focus {
+        &:hover,
+        &:focus,
+        &:active {
             color: gray;
             border-color: gray;
-            &:before {
+            &::before {
                 display: block;
             }
-            &:after {
+            &::after {
                 background: gray;
             }
             span {
@@ -420,13 +423,13 @@ h1 {
     @media @query-sm-and-down {
         font-size: 32px;
     }
-}
-h1.page-title {
-    @media @query-sm-and-down {
-        font-size: 36px;
-    }
-    @media @query-xxs-only {
-        font-size: 32px;
+    &.page-title {
+        @media @query-sm-and-down {
+            font-size: 36px;
+        }
+        @media @query-xxs-only {
+            font-size: 32px;
+        }
     }
 }
 .content.has-main-image {
@@ -494,7 +497,7 @@ h1.page-title {
     h1 {
         margin-top: 0;
         margin-bottom: 0;
-        &:after {
+        &::after {
             ._black-line();
             content: "";
             display: block;
@@ -509,7 +512,6 @@ html.touch {
     .js-combo-box-wrap {
         > .sqs-col-3.span-3 {
             > .sqs-block {
-                // flex: 0 0 auto;
                 &:first-child {
                     padding-top: 8px !important;
                     .image-block-wrapper {
@@ -521,7 +523,6 @@ html.touch {
                     }
                 }
                 &.sqs-block-html {
-                    // flex: 1 1 auto;
                     p {
                         margin-bottom: 8px !important;
                     }
@@ -563,8 +564,10 @@ html.touch {
             }
             &.sqs-block-html {
                 border-bottom-width: 2px;
-                padding: 20px 15px 0;
-                h3, p {
+                padding: 20px 15px 0 !important;
+                height: 100px;
+                h3,
+                p {
                     color: black;
                     font-size: 13px;
                     line-height: 1.4em;
@@ -575,7 +578,12 @@ html.touch {
                 }
                 p {
                     margin-top: 15px;
-                    margin-bottom: 30px;
+                }
+                @media @query-sm-only {
+                    height: 90px;
+                }
+                @media @query-xs-and-down {
+                    height: 80px;
                 }
             }
             &.sqs-block-spacer:first-child {
@@ -813,7 +821,7 @@ body#collection-5660c74be4b0c3b0ea69e347 {
                                                 top: 20px;
                                                 left: 0;
                                                 right: 0;
-                                                &:after {
+                                                &::after {
                                                     content: "";
                                                     display: block;
                                                     line-height: 0;
@@ -834,7 +842,7 @@ body#collection-5660c74be4b0c3b0ea69e347 {
                                                 }
                                                 &:nth-child(2) {
                                                     top: 100px;
-                                                    &:after {
+                                                    &::after {
                                                         width: 150px;
                                                         left: -160px;
                                                         @media @query-md-and-down {
@@ -933,7 +941,7 @@ body#collection-5660df08e4b0601b7496198e {
             > .title-desc-wrapper {
                 h1.page-title {
                     color: @switch-orange;
-                    &:after {
+                    &::after {
                         background: @switch-light-gray;
                     }
                 }
@@ -949,7 +957,8 @@ body#collection-5660df08e4b0601b7496198e {
             }
             .page-desc {
                 color: black;
-                &:before, &:after {
+                &::before,
+                &::after {
                     display: none;
                 }
                 > p:first-child {
@@ -977,7 +986,8 @@ body#collection-565e306ae4b0a1cc6f58f2ea {
     }
     .content-inner {
         ._squeeze-text-center();
-        .sqs-col-11, .sqs-col-6 {
+        .sqs-col-11,
+        .sqs-col-6 {
             h3 {
                 color: black;
             }
@@ -1050,7 +1060,7 @@ body#collection-566723536bb311fda414e41f {
             top: 50%;
             left: 0;
             transform: translateX(0) translateY(-50%) !important;
-            padding: 0 17px  !important;
+            padding: 0 17px !important;
             width: 100%;
             max-width: none;
         }
@@ -1124,7 +1134,7 @@ body#collection-566723536bb311fda414e41f {
         h1.entry-title {
             font-size: 26px !important;
             line-height: 1.2em !important;
-            &:after {
+            &::after {
                 margin-left: 0;
             }
         }
