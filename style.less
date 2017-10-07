@@ -562,6 +562,12 @@ html.touch {
                 background: white;
                 border-top-width: 2px;
             }
+            // these are the "inner" blocks
+            .intrinsic {
+                margin: 0 !important;
+                max-width: none !important;
+            }
+
             &.sqs-block-html {
                 border-bottom-width: 2px;
                 padding: 20px 15px 0 !important;
@@ -609,8 +615,10 @@ html.touch {
         }
         @media @query-xxs-only {
             width: 100% !important;
-            max-width: none;
+            max-width: 400px;
             min-width: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 }
