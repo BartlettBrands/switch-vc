@@ -607,18 +607,10 @@ html.touch {
     body#collection-565e4950e4b0c49af4ad432f {
         #content-wrapper {
             > .parallax-item {
-                background: @switch-orange;
-                .title-desc-image {
-                    background: transparent;
-                }
                 &[data-url-id="switch-vc"] {
-                    background: @switch-light-gray;
                     .title-desc-image {
                         ._parallax-main-hero-img();
                     }
-                }
-                &[data-url-id="follow-on-funding"] {
-                    background: black;
                 }
                 &[data-url-id^="founders-"] {
                     ._parallax-faces-touchscreen();
@@ -895,13 +887,6 @@ html.touch {
     body#collection-5660df08e4b0601b7496198e {
         #content-wrapper {
             > .parallax-item {
-                background: @switch-light-gray;
-                .title-desc-image {
-                    background: transparent;
-                }
-                &[data-url-id="breakers-makers"] {
-                    background: black;
-                }
                 &[data-url-id="paul"] {
                     ._parallax-faces-touchscreen();
                 }
@@ -1049,6 +1034,9 @@ body#collection-566723536bb311fda414e41f {
             max-width: none;
         }
     }
+    #banner-wrapper {
+        padding-top: 99px; // gets overwritten by js, this is just fallback
+    }
     .blog-list {
         ._squeeze-text-center();
         > article {
@@ -1102,17 +1090,6 @@ body#collection-566723536bb311fda414e41f {
             margin-bottom: 35px;
             > a {
                 display: block;
-            }
-            .main-image {
-                height: @height3;
-                width: 100%;
-                img {
-                    width: 100% !important;
-                    height: auto !important;
-                }
-                @media @query-xxs-only {
-                    height: @height5;
-                }
             }
         }
         h1.entry-title {

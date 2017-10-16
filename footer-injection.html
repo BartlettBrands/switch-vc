@@ -29,6 +29,7 @@
 
                 // VARS - selectors
                 var homeHeroWrap_SELECTORS  = '#parallax-images .image-container[data-url-id="switch-vc"]';
+                var blogListBody_SELECTORS  = '.collection-type-blog.view-list.has-banner-image';
                 var blogEntryBody_SELECTORS = '.collection-type-blog.view-item.has-banner-image';
                 var comboBox_SELECTORS      = '.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3';
 
@@ -40,7 +41,7 @@
                 if (isMobile && isScreen === 'home') {
                     homeHeroWrapMobileHeight = $('html.touch .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper').height();
                 }
-                var blogBannerImageHeight   = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
+                var blogEntryBannerHeight   = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
                 var blogEntryTitleHeight    = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner').outerHeight();
 
 
@@ -74,19 +75,12 @@
                 // COMBO BOX CSS
                 // add class only to 4 column-row boxes in "prestige" (not the first 4-col row one though). class is styled in CSS
                 $(comboBox_SELECTORS).parent().addClass("js-combo-box-wrap");
-                // find heights
-                // @from: http://stackoverflow.com/questions/6060992/element-with-the-max-height-from-a-set-of-elements
-                // var comboBoxHeightsMap = comboxBox_ELEM.map(function() {
-                //     return $(this).height();
-                // }).get();
-                // var comboBoxMaxHeight = Math.max.apply(null, comboBoxHeightsMap);
-                // // set hieght
-                // comboxBox_ELEM.css('height', comboBoxMaxHeight + 'px');
 
 
                 // BLOG ARTICLE CONTENT MARGIN
                 // adjust content margin for special blog article design
-                $('body').append('<style data-style="js-blog-entry-title">' + blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner {top:' + blogBannerImageHeight + 'px !important;}</style>');
+                $('body').append('<style data-style="js-blog-list-banner">' + blogListBody_SELECTORS + ' #banner-wrapper {padding-top:' + headerHeight + 'px !important;}</style>');
+                $('body').append('<style data-style="js-blog-entry-title">' + blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner {top:' + blogEntryBannerHeight + 'px !important;}</style>');
                 $('body').append('<style data-style="js-blog-entry-content">' + blogEntryBody_SELECTORS + ' #content-wrapper .content-inner {margin-top:' + (blogEntryTitleHeight+20) + 'px !important;}</style>');
 
                 // REMOVE HASH FROM URL
