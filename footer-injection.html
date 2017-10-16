@@ -27,16 +27,21 @@
                 var headerHeight    = $('#header').outerHeight();
                 var isMobile        = $('html').hasClass('touch');
 
+                // VARS - selectors
+                var homeHeroWrap_SELECTORS  = '#parallax-images .image-container[data-url-id="switch-vc"]';
+                var blogEntryBody_SELECTORS = '.collection-type-blog.view-item.has-banner-image';
+                var comboBox_SELECTORS      = '.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3';
+
+                // VARS - elements
+                var comboxBox_ELEM = $(".js-combo-box-wrap > .sqs-col-3 > .sqs-block-html");
+
+                // VARS - other
                 var homeHeroWrapMobileHeight;
                 if (isMobile && isScreen === 'home') {
                     homeHeroWrapMobileHeight = $('html.touch .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper').height();
                 }
-                // VARS - elements
-                var comboxBox_ELEM = $(".js-combo-box-wrap > .sqs-col-3 > .sqs-block-html");
-
-                // VARS - selectors
-                var homeHeroWrap_SELECTORS          = '#parallax-images .image-container[data-url-id="switch-vc"]';
-                var blogEntryContent_SELECTORS      = '.collection-type-blog.view-item.has-banner-image #content-wrapper .content-inner';
+                var blogBannerImageHeight   = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
+                var blogEntryTitleHeight    = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner').outerHeight();
 
 
 
@@ -68,7 +73,7 @@
 
                 // COMBO BOX CSS
                 // add class only to 4 column-row boxes in "prestige" (not the first 4-col row one though). class is styled in CSS
-                $('.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3').parent().addClass("js-combo-box-wrap");
+                $(comboBox_SELECTORS).parent().addClass("js-combo-box-wrap");
                 // find heights
                 // @from: http://stackoverflow.com/questions/6060992/element-with-the-max-height-from-a-set-of-elements
                 // var comboBoxHeightsMap = comboxBox_ELEM.map(function() {
@@ -81,8 +86,8 @@
 
                 // BLOG ARTICLE CONTENT MARGIN
                 // adjust content margin for special blog article design
-                var blogEntryMargin = $('.collection-type-blog.view-item.has-banner-image .title-desc-wrapper .title-desc-inner').height() - 20;
-                $('body').append('<style data-style="js-blog-entry-margin">' + blogEntryContent_SELECTORS + '{margin-top:' + blogEntryMargin + 'px !important;}</style>');
+                $('body').append('<style data-style="js-blog-entry-title">' + blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner {top:' + blogBannerImageHeight + 'px !important;}</style>');
+                $('body').append('<style data-style="js-blog-entry-content">' + blogEntryBody_SELECTORS + ' #content-wrapper .content-inner {margin-top:' + (blogEntryTitleHeight+20) + 'px !important;}</style>');
 
                 // REMOVE HASH FROM URL
                 // @from: http://stackoverflow.com/questions/269044/remove-fragment-in-url-with-javascript-w-out-causing-page-reload

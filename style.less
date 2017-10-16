@@ -1153,6 +1153,8 @@ body#collection-566723536bb311fda414e41f {
             padding-bottom: 0;
             overflow: visible;
             height: @height2;
+            display: block;
+            text-align: center;
             .title-desc-inner {
                 padding: 25px 60px;
                 background: white;
@@ -1160,6 +1162,11 @@ body#collection-566723536bb311fda414e41f {
                 max-height: @height2 - 50px; // subtract a 25px padding from top and bottom
                 top: @height3;
                 width: 90%;
+                margin: 0 auto;
+                @media @query-md-and-down {
+                    width: auto;
+                    margin: 0 3%;
+                }
                 @media @query-xxs-only {
                     h1.page-title {
                         font-size: 30px !important;
