@@ -942,6 +942,29 @@ body#collection-5660df08e4b0601b7496198e {
                 }
             }
         }
+       > .parallax-item[data-url-id="jason"] {
+            ._parallax-faces();
+            h1.page-title {
+                color: @switch-orange;
+            }
+            .page-desc {
+                color: black;
+                &::before,
+                &::after {
+                    display: none;
+                }
+                > p:first-child {
+                    font-size: 19px;
+                    line-height: 1.2em;
+                    letter-spacing: 0.2em;
+                    font-family: "proxima-nova";
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    margin-bottom: 30px;
+                    color: @switch-orange;
+                }
+            }
+        }
     }
 }
 
@@ -1164,4 +1187,7 @@ body#collection-566723536bb311fda414e41f {
             }
         }
     }
+}
+.display-icons-in-post-footer .entry-date {
+ display: none;
 }
