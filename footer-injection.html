@@ -41,7 +41,7 @@
                 if (isMobile && isScreen === 'home') {
                     homeHeroWrapMobileHeight = $('html.touch .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper').height();
                 }
-                var blogEntryBannerHeight   = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
+                var blogEntryBannerHeight   = 375 - headerHeight; // set from css so we'll just use it here // $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
                 var blogEntryTitleHeight    = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner').outerHeight();
 
 
@@ -81,7 +81,7 @@
                 // adjust content margin for special blog article design
                 $('body').append('<style data-style="js-blog-list-banner">' + blogListBody_SELECTORS + ' #banner-wrapper {padding-top:' + headerHeight + 'px !important;}</style>');
                 $('body').append('<style data-style="js-blog-entry-title">' + blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner {top:' + blogEntryBannerHeight + 'px !important;}</style>');
-                $('body').append('<style data-style="js-blog-entry-content">' + blogEntryBody_SELECTORS + ' #content-wrapper .content-inner {margin-top:' + (blogEntryTitleHeight+20) + 'px !important;}</style>');
+                $('body').append('<style data-style="js-blog-entry-content">' + blogEntryBody_SELECTORS + ' #content-wrapper .content-inner {margin-top:' + (blogEntryTitleHeight) + 'px !important;}</style>');
 
                 // REMOVE HASH FROM URL
                 // @from: http://stackoverflow.com/questions/269044/remove-fragment-in-url-with-javascript-w-out-causing-page-reload
