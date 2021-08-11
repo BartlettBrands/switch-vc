@@ -4,7 +4,7 @@
         $(window).load(function() {
 
             // VARS
-            var isScreen = '';
+            let isScreen = '';
             if ($('body').hasClass('collection-565e4950e4b0c49af4ad432f')) {
                 isScreen = 'home';
             }
@@ -23,26 +23,26 @@
                 $('style[data-style^="js-"]').remove();
 
                 // VARS
-                var windowHeight    = $(window).height();
-                var headerHeight    = $('#header').outerHeight();
-                var isMobile        = $('html').hasClass('touch');
+                let windowHeight    = $(window).height();
+                let headerHeight    = $('#header').outerHeight();
+                let isMobile        = $('html').hasClass('touch');
 
-                // VARS - selectors
-                var homeHeroWrap_SELECTORS  = '#parallax-images .image-container[data-url-id="switch-vc"]';
-                var blogListBody_SELECTORS  = '.collection-type-blog.view-list.has-banner-image';
-                var blogEntryBody_SELECTORS = '.collection-type-blog.view-item.has-banner-image';
-                var comboBox_SELECTORS      = '.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3';
+                // VARS - CONST - selectors
+                const homeHeroWrap_SELECTORS  = '#parallax-images .image-container[data-url-id="switch-vc"]';
+                const blogListBody_SELECTORS  = '.collection-type-blog.view-list.has-banner-image';
+                const blogEntryBody_SELECTORS = '.collection-type-blog.view-item.has-banner-image';
+                const comboBox_SELECTORS      = '.parallax-item[data-url-id="prestige"] .content-inner.has-content .sqs-layout > .sqs-row > .col > .sqs-row:not(:first-child) > .sqs-col-3.span-3';
 
-                // VARS - elements
-                var comboxBox_ELEM = $(".js-combo-box-wrap > .sqs-col-3 > .sqs-block-html");
+                // VARS - CONST - elements
+                const comboxBox_ELEM = $(".js-combo-box-wrap > .sqs-col-3 > .sqs-block-html");
 
                 // VARS - other
-                var homeHeroWrapMobileHeight;
+                var homeHeroWrapMobileHeight = '';
                 if (isMobile && isScreen === 'home') {
                     homeHeroWrapMobileHeight = $('html.touch .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper').height();
                 }
-                var blogEntryBannerHeight   = 375 - headerHeight; // set from css so we'll just use it here // $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
-                var blogEntryTitleHeight    = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner').outerHeight();
+                let blogEntryBannerHeight   = 375 - headerHeight; // set from css so we'll just use it here // $(blogEntryBody_SELECTORS + ' .title-desc-wrapper').height();
+                let blogEntryTitleHeight    = $(blogEntryBody_SELECTORS + ' .title-desc-wrapper .title-desc-inner').outerHeight();
 
 
 
@@ -53,7 +53,7 @@
                     $('body').append('<style data-style="js-header-height">' + headerWrapMobile_SELECTORS + ' {padding-top:' + headerHeight + 'px !important;}</style>');
                 }
 
-                // SET HEIGHT FOR MAIN HEROS (TOUCH AND NON TOUCH SCREEN)
+                // SET HEIGHT FOR MAIN HEROES (TOUCH AND NON TOUCH SCREEN)
                 if (isScreen === 'home') {
                     var homeHeroFalseTopImage_SELECTORS = 'html .parallax-item[data-url-id="switch-vc"] .title-desc-wrapper .title-desc-image';
 
